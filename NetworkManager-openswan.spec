@@ -6,7 +6,7 @@
 Summary:   NetworkManager VPN plug-in for openswan
 Name:      NetworkManager-openswan
 Version:   0.8.0
-Release:   10%{?dist}
+Release:   11%{?dist}
 License:   GPLv2+
 Group:     System Environment/Base
 URL:       http://people.redhat.com/avagarwa/files/NetworkManager-openswan/
@@ -39,6 +39,8 @@ BuildRequires: intltool gettext
 Requires: NetworkManager
 Requires: gnome-keyring
 Requires: openswan  >= %{openswan_version}
+
+Provides: NetworkManager-libreswan = %{version}-%{release}
 
 
 %description
@@ -91,6 +93,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/gnome-vpn-properties/openswan
 
 %changelog
+* Wed Jan 27 2016 Paul Wouters <pwouters@redhat.com> - 0.8.0-11
+Related: #1267394
+- Provide NetworkManager-libreswan
+
 * Thu Dec 03 2015 Lubomir Rintel <lrintel@redhat.com> - 0.8.0-10
 Related: #1267394
 - Improve synchronization with pluto to cope with possible races with Libreswan
