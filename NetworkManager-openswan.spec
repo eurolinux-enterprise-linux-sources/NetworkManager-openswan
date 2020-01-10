@@ -6,7 +6,7 @@
 Summary:   NetworkManager VPN plug-in for openswan
 Name:      NetworkManager-openswan
 Version:   0.8.0
-Release:   7%{?dist}
+Release:   8%{?dist}
 License:   GPLv2+
 Group:     System Environment/Base
 URL:       http://people.redhat.com/avagarwa/files/NetworkManager-openswan/
@@ -23,6 +23,7 @@ Patch2: nm-changes.patch
 Patch3: nm-616910.patch
 Patch4: nm-openswan-659709.patch
 Patch5: nm-684809-705890-702323.patch
+Patch6: nm-openswan-696946-748365.patch
 
 BuildRequires: gtk2-devel
 #BuildRequires: dbus-devel
@@ -50,6 +51,7 @@ with NetworkManager and the GNOME desktop
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 %configure --disable-static --enable-more-warnings=yes
@@ -84,6 +86,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/gnome-vpn-properties/openswan
 
 %changelog
+* Fri Mar 2 2012 Avesh Agarwal <avagarwa@redhat.com> - 0.8.0-8
+Resolves: #696946
+Resolves: #748365
+
 * Mon Apr 4 2011 Avesh Agarwal <avagarwa@redhat.com> - 0.8.0-7
 Resolves: #684809
 Resolves: #705890
