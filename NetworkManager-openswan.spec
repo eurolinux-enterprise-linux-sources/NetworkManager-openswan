@@ -6,7 +6,7 @@
 Summary:   NetworkManager VPN plug-in for openswan
 Name:      NetworkManager-openswan
 Version:   0.8.0
-Release:   8%{?dist}
+Release:   10%{?dist}
 License:   GPLv2+
 Group:     System Environment/Base
 URL:       http://people.redhat.com/avagarwa/files/NetworkManager-openswan/
@@ -24,6 +24,8 @@ Patch3: nm-616910.patch
 Patch4: nm-openswan-659709.patch
 Patch5: nm-684809-705890-702323.patch
 Patch6: nm-openswan-696946-748365.patch
+Patch7: NetworkManager-openswan-0.8-libreswan.patch
+Patch8: nm-openswan-races.patch
 
 BuildRequires: gtk2-devel
 #BuildRequires: dbus-devel
@@ -52,6 +54,8 @@ with NetworkManager and the GNOME desktop
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
+%patch8 -p1
 
 %build
 %configure --disable-static --enable-more-warnings=yes
@@ -82,10 +86,20 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/NetworkManager/VPN/nm-openswan-service.name
 %{_libexecdir}/nm-openswan-service
 %{_libexecdir}/nm-openswan-service-helper
+%{_libexecdir}/nm-libreswan-service-helper
 %{_datadir}/gnome-vpn-properties/openswan/nm-openswan-dialog.glade
 %dir %{_datadir}/gnome-vpn-properties/openswan
 
 %changelog
+* Thu Dec 03 2015 Lubomir Rintel <lrintel@redhat.com> - 0.8.0-10
+Related: #1267394
+- Improve synchronization with pluto to cope with possible races with Libreswan
+
+* Thu Sep 17 2015 Paul Wouters <pwouters@redhat.com> - 0.8.0-9
+Resolves: #1267394
+- Add libreswan softlinks for nm helper to support libreswan dropin
+- Support for libreswan env vars PLUTO_PEER_DNS_INFO, PLUTO_PEER_DOMAIN_INFO and libreswan_reason
+
 * Fri Mar 2 2012 Avesh Agarwal <avagarwa@redhat.com> - 0.8.0-8
 Resolves: #696946
 Resolves: #748365
